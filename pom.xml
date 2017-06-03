@@ -58,7 +58,7 @@
                             <sourcePaths>
                                 <param>${project.basedir}/src/main/resources/schema</param>
                             </sourcePaths>
-                            <targetPackage>json</targetPackage>
+                            <targetPackage>users</targetPackage>
                             <outputDirectory>${project.basedir}/target/generated-sources/jsonschema</outputDirectory>
                             <annotationStyle>jackson1</annotationStyle>
                             <generateBuilders>true</generateBuilders>
