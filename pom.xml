@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-actuator-service</artifactId>
+    <artifactId>grow-together-service</artifactId>
     <version>0.1.0</version>
 
     <parent>
@@ -27,6 +27,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jsonschema2pojo</groupId>
+            <artifactId>jsonschema2pojo-core</artifactId>
+            <version>0.4.5</version>
+        </dependency>
     </dependencies>
 
 
@@ -40,7 +45,32 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.jsonschema2pojo</groupId>
+                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                <version>0.4.5</version>
+
+                <executions>
+                    <execution>
+                        <id>json-schema</id>
+                        <configuration>
+                            <sourcePaths>
+                                <param>${project.basedir}/src/main/resources/schema</param>
+                            </sourcePaths>
+                            <targetPackage>json</targetPackage>
+                            <outputDirectory>${project.basedir}/target/generated-sources/jsonschema</outputDirectory>
+                            <annotationStyle>jackson1</annotationStyle>
+                            <generateBuilders>true</generateBuilders>
+                        </configuration>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
     </build>
 
 </project>

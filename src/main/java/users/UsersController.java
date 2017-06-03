@@ -14,7 +14,7 @@ public class UsersController {
 
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody User getUser(@RequestParam(value="id", required=true) int id) {
-        return new User(1, "first", "last", "firstlast@gpmail.org");
+        return new User(id, "first", "last", "firstlast@gpmail.org");
     }
 
     @RequestMapping(method=RequestMethod.POST)

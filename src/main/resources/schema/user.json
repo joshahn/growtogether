@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "#user",
+    "type": "object",
+    "title": "User Schema",
+    "description": "The details of a particular User",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "ID of a User",
+            "minimum": 1,
+            "o:queryable": "true"
+        },
+        "firstName": {
+            "type": "string",
+            "description": "First Name of a user",
+            "minLength": 1,
+            "maxLength": 255,
+            "o:queryable": "true"
+        },
+        "lastName": {
+            "type": "string",
+            "description": "Last Name of a user",
+            "minLength": 1,
+            "maxLength": 255,
+            "o:queryable": "true"
+        },
+        "email": {
+            "type": "string",
+            "description": "Email of a user",
+            "minLength": 1,
+            "maxLength": 255,
+            "o:queryable": "true"
+        }
+    },
+    "required": [
+        "id",
+        "firtName",
+        "lastName"
+    ]
+}
