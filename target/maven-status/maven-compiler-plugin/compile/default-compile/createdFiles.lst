@@ -1,3 +1,4 @@
 users/Configuration.class
 users/User.class
+users/BaseController.class
 users/UsersController.class
