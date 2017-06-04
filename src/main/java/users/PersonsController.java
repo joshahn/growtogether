@@ -1,5 +1,6 @@
 package users;
 
+import errors.*;
 import json.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,23 +25,25 @@ public class PersonsController extends BaseController {
 
 
     @RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody List<Person> getPerson(@RequestParam(value="id", required=true) int id) {
+    public @ResponseBody Integer getPerson(@RequestParam(value="email", required=true) String email) {
         try (Connection connection = getConnection()) {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM person");
+            connection.setAutoCommit(false);
+            String createStatement = "SELECT * FROM person where email = ?";
+            PreparedStatement pstmt = connection.prepareStatement(createStatement);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
 
             List<Person> results = new ArrayList<>();
-            while (rs.next()) {
-                Person person = new Person();
-                person.setId(rs.getInt("id"));
-                person.setFirstName(rs.getString("first_name"));
-                person.setLastName(rs.getString("last_name"));
-                person.setEmail(rs.getString("email"));
-                results.add(person);
+            if (rs.next()) {
+                rs.close();
+                pstmt.close();
+                connection.close();
+                return rs.getInt("id");
             }
-            return results;
         } catch (Exception e) {
-            return new ArrayList<Person>();
+            throw new NotFoundException("email not registered");
+        } finally {
+            return 0;
         }
     }
 

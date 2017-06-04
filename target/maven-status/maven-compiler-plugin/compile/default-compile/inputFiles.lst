@@ -1,3 +1,5 @@
+/Users/jason.j.lu/Workspace/growtogether/src/main/java/errors/NotFoundException.java
+/Users/jason.j.lu/Workspace/growtogether/src/main/java/errors/ServiceException.java
 /Users/jason.j.lu/Workspace/growtogether/src/main/java/users/BaseController.java
 /Users/jason.j.lu/Workspace/growtogether/target/generated-sources/jsonschema/json/Person.java
 /Users/jason.j.lu/Workspace/growtogether/src/main/java/users/PersonsController.java

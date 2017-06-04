@@ -1,3 +1,5 @@
+errors/NotFoundException.class
+errors/ServiceException.class
 json/Person.class
 users/Configuration.class
 users/PersonsController.class
