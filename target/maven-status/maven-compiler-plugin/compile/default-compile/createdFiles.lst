@@ -1,5 +1,4 @@
 users/Configuration.class
-users/DBController.class
-users/User.class
+json/User.class
 users/BaseController.class
 users/UsersController.class
