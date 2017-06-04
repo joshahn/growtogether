@@ -47,8 +47,8 @@ public class PersonsController extends BaseController {
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
 
-            boolean result = stmt.execute(String.format("INSERT INTO person (id, first_name, last_name, email, team_id) VALUES (%d, %s, %s, %s, %d)",
-                    Person.getId(), Person.getFirstName(), Person.getLastName(), Person.getEmail()), 1);
+            stmt.addBatch(String.format("INSERT INTO person (id, first_name, last_name, email, team_id) VALUES (%d, %s, %s, %s, %d)",
+                    Person.getId(), Person.getFirstName(), Person.getLastName(), Person.getEmail(), 1));
 
             return Person;
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class PersonsController extends BaseController {
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
 
-            boolean result = stmt.execute(String.format("DELETE FROM Persons WHERE id = " + id));
+            boolean result = stmt.execute(String.format("DELETE FROM person WHERE id = " + id));
 
             return "Person with id " + id + " deleted";
         } catch (Exception e) {
