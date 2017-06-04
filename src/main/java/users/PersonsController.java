@@ -28,12 +28,13 @@ public class PersonsController extends BaseController {
 
             List<Person> results = new ArrayList<>();
             while (rs.next()) {
-                Person Person = new Person();
-                Person.setId(rs.getInt(0));
-                Person.setFirstName(rs.getString(1));
-                Person.setLastName(rs.getString(2));
-                Person.setEmail(rs.getString(3));
-                results.add(Person);
+                Person person = new Person();
+                person.setId(rs.getInt(0));
+                person.setFirstName(rs.getString(1));
+                person.setLastName(rs.getString(2));
+                person.setEmail(rs.getString(3));
+                person.setTeam(rs.getInt(4));
+                results.add(person);
             }
             return results;
         } catch (Exception e) {

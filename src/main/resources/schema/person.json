@@ -9,29 +9,30 @@
         "id": {
             "type": "integer",
             "description": "ID of a Person",
-            "minimum": 1,
-            "o:queryable": "true"
+            "minimum": 1
         },
         "firstName": {
             "type": "string",
             "description": "First Name of a Person",
             "minLength": 1,
-            "maxLength": 255,
-            "o:queryable": "true"
+            "maxLength": 255
         },
         "lastName": {
             "type": "string",
             "description": "Last Name of a Person",
             "minLength": 1,
-            "maxLength": 255,
-            "o:queryable": "true"
+            "maxLength": 255
         },
         "email": {
             "type": "string",
             "description": "Email of a Person",
             "minLength": 1,
-            "maxLength": 255,
-            "o:queryable": "true"
+            "maxLength": 255
+        },
+        "team": {
+            "type": "integer",
+            "description": "a person's team id",
+            "minimum": 1
         }
     },
     "required": [

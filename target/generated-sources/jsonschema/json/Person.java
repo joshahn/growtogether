@@ -22,7 +22,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
     "id",
     "firstName",
     "lastName",
-    "email"
+    "email",
+    "team"
 })
 public class Person {
 
@@ -50,6 +51,12 @@ public class Person {
      */
     @JsonProperty("email")
     private String email;
+    /**
+     * a person's team id
+     * 
+     */
+    @JsonProperty("team")
+    private Integer team;
 
     /**
      * ID of a Person
@@ -156,6 +163,33 @@ public class Person {
 
     public Person withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    /**
+     * a person's team id
+     * 
+     * @return
+     *     The team
+     */
+    @JsonProperty("team")
+    public Integer getTeam() {
+        return team;
+    }
+
+    /**
+     * a person's team id
+     * 
+     * @param team
+     *     The team
+     */
+    @JsonProperty("team")
+    public void setTeam(Integer team) {
+        this.team = team;
+    }
+
+    public Person withTeam(Integer team) {
+        this.team = team;
         return this;
     }
 
