@@ -33,9 +33,13 @@ public class PersonsController extends BaseController {
             while (rs.next()) {
                 Person person = new Person();
                 person.setId(rs.getInt(0));
+                System.out.println(String.format("Processed id %d", person.getId()));
                 person.setFirstName(rs.getString(1));
+                System.out.println(String.format("Processed first name %s", person.getFirstName()));
                 person.setLastName(rs.getString(2));
+                System.out.println(String.format("Processed last name %s", person.getLastName()));
                 person.setEmail(rs.getString(3));
+                System.out.println(String.format("Processed email %s", person.getEmail()));
                 person.setTeam(rs.getInt(4));
                 System.out.println(String.format("Found 1 person with id %d, firstName %s, lastName %s, email %s, team %d",
                         person.getId(), person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeam()));
