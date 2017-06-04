@@ -3,7 +3,7 @@ package users;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages="users")
+@SpringBootApplication
 public class Configuration {
 
 	public static void main(String[] args) {
