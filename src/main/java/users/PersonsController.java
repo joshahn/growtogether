@@ -47,15 +47,19 @@ public class PersonsController extends BaseController {
     public @ResponseBody Person createPerson(@RequestBody Person person) {
         try (Connection connection = getConnection()) {
             System.out.println("Successful got a db connection");
+            connection.setAutoCommit(false);
             Statement stmt = connection.createStatement();
 
-            stmt.addBatch(String.format("INSERT INTO person (first_name, last_name, email, team_id) VALUES (%s, %s, %s, %d)",
+            stmt.executeUpdate(String.format("INSERT INTO person (first_name, last_name, email, team_id) VALUES (%s, %s, %s, %d)",
                     person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeamId()));
             System.out.println("Successfully executed createPerson query");
-
+            stmt.close();
+            connection.commit();
+            connection.close();
             return person;
         } catch (Exception e) {
             return person;
+        } finally {
         }
     }
 
