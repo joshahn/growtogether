@@ -22,6 +22,7 @@ public class PersonsController extends BaseController {
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody List<Person> getPerson(@RequestParam(value="id", required=true) int id) {
         try (Connection connection = getConnection()) {
+            System.out.println("Successful got a db connection");
             Statement stmt = connection.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM person");
