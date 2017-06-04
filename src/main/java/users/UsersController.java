@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/users")
-public class UsersController extends BaseController{
+public class UsersController extends BaseController {
 
 
     @RequestMapping(method=RequestMethod.GET)
