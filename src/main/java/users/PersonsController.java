@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -48,18 +49,25 @@ public class PersonsController extends BaseController {
         try (Connection connection = getConnection()) {
             System.out.println("Successful got a db connection");
             connection.setAutoCommit(false);
-            Statement stmt = connection.createStatement();
 
-            stmt.executeUpdate(String.format("INSERT INTO person (first_name, last_name, email, team_id) VALUES (%s, %s, %s, %d)",
-                    person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeamId()));
-            System.out.println("Successfully executed createPerson query");
-            stmt.close();
+            String createStatement = "INSERT INTO person (first_name, last_name, email, team_id) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(createStatement,
+                    Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, person.getFirstName());
+            pstmt.setString(2, person.getLastName());
+            pstmt.setString(3, person.getEmail());
+            pstmt.setInt(4, person.getTeamId());
+
+            int affectedRows = pstmt.executeUpdate();
+
+            System.out.println("Successfully executed createPerson query for affectedRows " + affectedRows);
+
+            pstmt.close();
             connection.commit();
             connection.close();
             return person;
         } catch (Exception e) {
             return person;
-        } finally {
         }
     }
 
