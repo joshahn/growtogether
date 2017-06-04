@@ -31,13 +31,14 @@ public class PersonsController extends BaseController {
             System.out.println("Successfully executed getPerson select query");
             int count = 1;
             while (rs.next()) {
-                System.out.println("Select Person id = " + count);
                 Person person = new Person();
                 person.setId(rs.getInt(0));
                 person.setFirstName(rs.getString(1));
                 person.setLastName(rs.getString(2));
                 person.setEmail(rs.getString(3));
                 person.setTeam(rs.getInt(4));
+                System.out.println(String.format("Found 1 person with id %d, firstName %s, lastName %s, email %s, team %d",
+                        person.getId(), person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeam()));
                 results.add(person);
                 count ++;
             }
