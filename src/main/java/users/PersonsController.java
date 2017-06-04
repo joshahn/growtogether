@@ -51,12 +51,16 @@ public class PersonsController extends BaseController {
             connection.setAutoCommit(false);
 
             String createStatement = "INSERT INTO person (first_name, last_name, email, team_id) VALUES (?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(createStatement,
-                    Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = connection.prepareStatement(createStatement);
+            System.out.println("created prepare statement");
             pstmt.setString(1, person.getFirstName());
+            System.out.println("set first name");
             pstmt.setString(2, person.getLastName());
+            System.out.println("set last name");
             pstmt.setString(3, person.getEmail());
+            System.out.println("set email");
             pstmt.setInt(4, person.getTeamId());
+            System.out.println("set team id");
 
             int affectedRows = pstmt.executeUpdate();
 
