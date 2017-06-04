@@ -28,11 +28,6 @@
             "description": "Email of a Person",
             "minLength": 1,
             "maxLength": 255
-        },
-        "teamId": {
-            "type": "integer",
-            "description": "a person's team id",
-            "minimum": 1
         }
     },
     "required": [
