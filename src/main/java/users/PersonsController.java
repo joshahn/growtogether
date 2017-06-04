@@ -22,31 +22,19 @@ public class PersonsController extends BaseController {
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody List<Person> getPerson(@RequestParam(value="id", required=true) int id) {
         try (Connection connection = getConnection()) {
-            System.out.println("Successful got a db connection");
             Statement stmt = connection.createStatement();
-
             ResultSet rs = stmt.executeQuery("SELECT * FROM person");
 
             List<Person> results = new ArrayList<>();
-            System.out.println("Successfully executed getPerson select query");
-            int count = 1;
             while (rs.next()) {
                 Person person = new Person();
                 person.setId(rs.getInt("id"));
-                System.out.println(String.format("Processed id %d", person.getId()));
                 person.setFirstName(rs.getString("first_name"));
-                System.out.println(String.format("Processed first name %s", person.getFirstName()));
                 person.setLastName(rs.getString("last_name"));
-                System.out.println(String.format("Processed last name %s", person.getLastName()));
                 person.setEmail(rs.getString("email"));
-                System.out.println(String.format("Processed email %s", person.getEmail()));
                 person.setTeamId(rs.getInt("team_id"));
-                System.out.println(String.format("Found 1 person with id %d, firstName %s, lastName %s, email %s, team_id %d",
-                        person.getId(), person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeamId()));
                 results.add(person);
-                count ++;
             }
-            System.out.println("Final Person count = " + (count - 1));
             return results;
         } catch (Exception e) {
             return new ArrayList<Person>();
@@ -54,24 +42,24 @@ public class PersonsController extends BaseController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public @ResponseBody Person createPerson(@RequestBody Person Person) {
+    public @ResponseBody Person createPerson(@RequestBody Person person) {
         try (Connection connection = getConnection()) {
             System.out.println("Successful got a db connection");
             Statement stmt = connection.createStatement();
 
-            stmt.addBatch(String.format("INSERT INTO person (id, first_name, last_name, email, team_id) VALUES (%d, %s, %s, %s, %d)",
-                    Person.getId(), Person.getFirstName(), Person.getLastName(), Person.getEmail(), 1));
+            stmt.addBatch(String.format("INSERT INTO person (first_name, last_name, email, team_id) VALUES (%s, %s, %s, %d)",
+                    person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeamId()));
             System.out.println("Successfully executed createPerson query");
 
-            return Person;
+            return person;
         } catch (Exception e) {
-            return Person;
+            return person;
         }
     }
 
     @RequestMapping(method=RequestMethod.PUT)
-    public @ResponseBody Person updatePerson(@RequestBody Person Person) {
-        return Person;
+    public @ResponseBody Person updatePerson(@RequestBody Person person) {
+        return person;
     }
 
     @RequestMapping(method=RequestMethod.DELETE)
