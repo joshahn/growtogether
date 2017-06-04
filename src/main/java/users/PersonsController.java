@@ -21,7 +21,7 @@ public class PersonsController extends BaseController {
 
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody List<Person> getPerson(@RequestParam(value="id", required=true) int id) {
-        try (Connection connection = dataSource.getConnection()) {
+        try (Connection connection = getConnection()) {
             Statement stmt = connection.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM person");
@@ -44,7 +44,7 @@ public class PersonsController extends BaseController {
 
     @RequestMapping(method=RequestMethod.POST)
     public @ResponseBody Person createPerson(@RequestBody Person Person) {
-        try (Connection connection = dataSource.getConnection()) {
+        try (Connection connection = getConnection()) {
             Statement stmt = connection.createStatement();
 
             stmt.addBatch(String.format("INSERT INTO person (id, first_name, last_name, email, team_id) VALUES (%d, %s, %s, %s, %d)",
@@ -63,7 +63,7 @@ public class PersonsController extends BaseController {
 
     @RequestMapping(method=RequestMethod.DELETE)
     public @ResponseBody String deletePerson(@RequestParam(value="id", required=true) int id) {
-        try (Connection connection = dataSource.getConnection()) {
+        try (Connection connection = getConnection()) {
             Statement stmt = connection.createStatement();
 
             boolean result = stmt.execute(String.format("DELETE FROM person WHERE id = " + id));
