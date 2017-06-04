@@ -23,7 +23,7 @@ public class UsersController extends BaseController {
         try (Connection connection = dataSource.getConnection()) {
             Statement stmt = connection.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE id = " + id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
 
             List<User> results = new ArrayList<>();
             while (rs.next()) {
