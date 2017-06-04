@@ -1,5 +1,6 @@
 package users;
 
+import json.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,8 @@ public class UsersController {
 
 
     @RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody User getUser(@RequestParam(value="id", required=true) int id) {
+    public @ResponseBody
+    User getUser(@RequestParam(value="id", required=true) int id) {
         User user = new User();
         user.setId(id);
         user.setFirstName("first");
