@@ -1,0 +1,5 @@
+{
+  "name": "Grow Together App",
+  "description": "Let's grow together as we earn points and challenge one another in teams",
+  "addons": [ "heroku-postgresql" ]
+}
