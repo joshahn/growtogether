@@ -1,4 +1,4 @@
+json/Person.class
 users/Configuration.class
-json/User.class
+users/PersonsController.class
 users/BaseController.class
-users/UsersController.class

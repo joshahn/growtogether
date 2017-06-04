@@ -11,9 +11,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 
 /**
- * User Schema
+ * Person Schema
  * <p>
- * The details of a particular User
+ * The details of a particular Person
  * 
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -24,35 +24,35 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
     "lastName",
     "email"
 })
-public class User {
+public class Person {
 
     /**
-     * ID of a User
+     * ID of a Person
      * 
      */
     @JsonProperty("id")
     private Integer id;
     /**
-     * First Name of a user
+     * First Name of a Person
      * 
      */
     @JsonProperty("firstName")
     private String firstName;
     /**
-     * Last Name of a user
+     * Last Name of a Person
      * 
      */
     @JsonProperty("lastName")
     private String lastName;
     /**
-     * Email of a user
+     * Email of a Person
      * 
      */
     @JsonProperty("email")
     private String email;
 
     /**
-     * ID of a User
+     * ID of a Person
      * 
      * @return
      *     The id
@@ -63,7 +63,7 @@ public class User {
     }
 
     /**
-     * ID of a User
+     * ID of a Person
      * 
      * @param id
      *     The id
@@ -73,13 +73,13 @@ public class User {
         this.id = id;
     }
 
-    public User withId(Integer id) {
+    public Person withId(Integer id) {
         this.id = id;
         return this;
     }
 
     /**
-     * First Name of a user
+     * First Name of a Person
      * 
      * @return
      *     The firstName
@@ -90,7 +90,7 @@ public class User {
     }
 
     /**
-     * First Name of a user
+     * First Name of a Person
      * 
      * @param firstName
      *     The firstName
@@ -100,13 +100,13 @@ public class User {
         this.firstName = firstName;
     }
 
-    public User withFirstName(String firstName) {
+    public Person withFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
 
     /**
-     * Last Name of a user
+     * Last Name of a Person
      * 
      * @return
      *     The lastName
@@ -117,7 +117,7 @@ public class User {
     }
 
     /**
-     * Last Name of a user
+     * Last Name of a Person
      * 
      * @param lastName
      *     The lastName
@@ -127,13 +127,13 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User withLastName(String lastName) {
+    public Person withLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
     /**
-     * Email of a user
+     * Email of a Person
      * 
      * @return
      *     The email
@@ -144,7 +144,7 @@ public class User {
     }
 
     /**
-     * Email of a user
+     * Email of a Person
      * 
      * @param email
      *     The email
@@ -154,7 +154,7 @@ public class User {
         this.email = email;
     }
 
-    public User withEmail(String email) {
+    public Person withEmail(String email) {
         this.email = email;
         return this;
     }
