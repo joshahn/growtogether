@@ -40,9 +40,9 @@ public class PersonsController extends BaseController {
                 System.out.println(String.format("Processed last name %s", person.getLastName()));
                 person.setEmail(rs.getString("email"));
                 System.out.println(String.format("Processed email %s", person.getEmail()));
-                person.setTeam(rs.getInt("team"));
-                System.out.println(String.format("Found 1 person with id %d, firstName %s, lastName %s, email %s, team %d",
-                        person.getId(), person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeam()));
+                person.setTeamId(rs.getInt("team_id"));
+                System.out.println(String.format("Found 1 person with id %d, firstName %s, lastName %s, email %s, team_id %d",
+                        person.getId(), person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeamId()));
                 results.add(person);
                 count ++;
             }

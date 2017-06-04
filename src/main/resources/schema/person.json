@@ -29,7 +29,7 @@
             "minLength": 1,
             "maxLength": 255
         },
-        "team": {
+        "teamId": {
             "type": "integer",
             "description": "a person's team id",
             "minimum": 1
