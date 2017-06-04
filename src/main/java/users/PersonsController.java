@@ -32,15 +32,15 @@ public class PersonsController extends BaseController {
             int count = 1;
             while (rs.next()) {
                 Person person = new Person();
-                person.setId(rs.getInt(0));
+                person.setId(rs.getInt("id"));
                 System.out.println(String.format("Processed id %d", person.getId()));
-                person.setFirstName(rs.getString(1));
+                person.setFirstName(rs.getString("first_name"));
                 System.out.println(String.format("Processed first name %s", person.getFirstName()));
-                person.setLastName(rs.getString(2));
+                person.setLastName(rs.getString("last_name"));
                 System.out.println(String.format("Processed last name %s", person.getLastName()));
-                person.setEmail(rs.getString(3));
+                person.setEmail(rs.getString("email"));
                 System.out.println(String.format("Processed email %s", person.getEmail()));
-                person.setTeam(rs.getInt(4));
+                person.setTeam(rs.getInt("team"));
                 System.out.println(String.format("Found 1 person with id %d, firstName %s, lastName %s, email %s, team %d",
                         person.getId(), person.getFirstName(), person.getLastName(), person.getEmail(), person.getTeam()));
                 results.add(person);
