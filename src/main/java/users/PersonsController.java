@@ -32,18 +32,16 @@ public class PersonsController extends BaseController {
             PreparedStatement pstmt = connection.prepareStatement(createStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
-
-            List<Person> results = new ArrayList<>();
             if (rs.next()) {
                 rs.close();
                 pstmt.close();
                 connection.close();
                 return rs.getInt("id");
+            } else {
+                throw new NotFoundException("email not registered");
             }
         } catch (Exception e) {
-            throw new NotFoundException("email not registered");
-        } finally {
-            return 0;
+            throw new ServiceException("Got an Internal Service Error while retriving person by email " + email);
         }
     }
 
