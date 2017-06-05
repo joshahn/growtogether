@@ -40,10 +40,8 @@ public class PersonsController extends BaseController {
             } else {
                 throw new NotFoundException("email not registered");
             }
-        } catch (SQLException e) {
-            throw new NotFoundException("email not registered");
         } catch (Exception e) {
-            throw new ServiceException("Got an Internal Service Error while retriving person by email " + email);
+            throw new NotFoundException("email not registered");
         }
     }
 
