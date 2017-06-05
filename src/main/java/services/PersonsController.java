@@ -32,35 +32,26 @@ public class PersonsController extends BaseController {
                     "INNER JOIN person p ON (p.id = pt.person_id) WHERE p.email = ?;";
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
-            System.out.println("Created select query");
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("executed select query");
             if (rs.next()) {
-                System.out.println("Getting first result");
                 Person person = new Person();
                 person.setId(rs.getInt("id"));
                 person.setFirstName(rs.getString("first_name"));
                 person.setLastName(rs.getString("last_name"));
                 person.setEmail(rs.getString("email"));
-                System.out.println("Set Person object");
                 List<Task> tasks = new ArrayList<>();
                 Task task = new Task();
                 task.setName(rs.getString("name"));
                 task.setPoints(rs.getInt("points"));
-                System.out.println("Set Task object");
                 tasks.add(task);
 
                 Integer totalPoints = task.getPoints();
-                System.out.println("Getting more Tasks objects, totalPoints = " + totalPoints);
-
                 while (rs.next()) {
                     task = new Task();
                     task.setName(rs.getString("name"));
                     task.setPoints(rs.getInt("points"));
                     totalPoints += task.getPoints();
                     tasks.add(task);
-                    System.out.println("Getting more Tasks objects, totalPoints = " + totalPoints);
-
                 }
                 person.setTasks(tasks);
                 person.setTotalPoints(totalPoints);
