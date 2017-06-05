@@ -1,8 +1,6 @@
 
 package json;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -24,9 +22,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
     "id",
     "firstName",
     "lastName",
-    "email",
-    "tasks",
-    "totalPoints"
+    "email"
 })
 public class Person {
 
@@ -54,14 +50,6 @@ public class Person {
      */
     @JsonProperty("email")
     private String email;
-    @JsonProperty("tasks")
-    private List<Task> tasks = new ArrayList<Task>();
-    /**
-     * How many points a person has
-     * 
-     */
-    @JsonProperty("totalPoints")
-    private Integer totalPoints;
 
     /**
      * ID of a Person
@@ -168,58 +156,6 @@ public class Person {
 
     public Person withEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    /**
-     * 
-     * @return
-     *     The tasks
-     */
-    @JsonProperty("tasks")
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    /**
-     * 
-     * @param tasks
-     *     The tasks
-     */
-    @JsonProperty("tasks")
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public Person withTasks(List<Task> tasks) {
-        this.tasks = tasks;
-        return this;
-    }
-
-    /**
-     * How many points a person has
-     * 
-     * @return
-     *     The totalPoints
-     */
-    @JsonProperty("totalPoints")
-    public Integer getTotalPoints() {
-        return totalPoints;
-    }
-
-    /**
-     * How many points a person has
-     * 
-     * @param totalPoints
-     *     The totalPoints
-     */
-    @JsonProperty("totalPoints")
-    public void setTotalPoints(Integer totalPoints) {
-        this.totalPoints = totalPoints;
-    }
-
-    public Person withTotalPoints(Integer totalPoints) {
-        this.totalPoints = totalPoints;
         return this;
     }
 

@@ -28,23 +28,11 @@
             "description": "Email of a Person",
             "minLength": 1,
             "maxLength": 255
-        },
-        "tasks": {
-            "type": "array",
-            "descrption": "All the tasks a person has completed",
-            "items": {
-                "$ref": "task.json"
-            }
-        },
-        "totalPoints": {
-            "type": "integer",
-            "description": "How many points a person has",
-            "minimum": 0
         }
     },
     "required": [
+        "id",
         "firtName",
-        "lastName",
-        "email"
+        "lastName"
     ]
 }
