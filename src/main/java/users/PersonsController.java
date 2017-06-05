@@ -28,15 +28,16 @@ public class PersonsController extends BaseController {
     public @ResponseBody Integer getPerson(@RequestParam(value="email", required=true) String email) {
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
-            String createStatement = "SELECT * FROM person where email = ?";
-            PreparedStatement pstmt = connection.prepareStatement(createStatement);
+            String selectStatement = "SELECT id FROM person where email = ?";
+            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+                int personId = rs.getInt("id");
                 rs.close();
                 pstmt.close();
                 connection.close();
-                return rs.getInt("id");
+                return personId;
             } else {
                 throw new NotFoundException("email not registered");
             }
