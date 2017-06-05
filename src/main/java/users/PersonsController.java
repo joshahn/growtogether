@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @Transactional
@@ -41,6 +40,8 @@ public class PersonsController extends BaseController {
             } else {
                 throw new NotFoundException("email not registered");
             }
+        } catch (SQLException e) {
+            throw new NotFoundException("email not registered");
         } catch (Exception e) {
             throw new ServiceException("Got an Internal Service Error while retriving person by email " + email);
         }
