@@ -24,19 +24,23 @@ public class PersonsController extends BaseController {
 
 
     @RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody Integer getPerson(@RequestParam(value="email", required=true) String email) {
+    public @ResponseBody Person getPerson(@RequestParam(value="email", required=true) String email) {
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
-            String selectStatement = "SELECT id FROM person where email = ?";
+            String selectStatement = "SELECT * FROM person where email = ? limit 1";
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                int personId = rs.getInt("id");
+                Person person = new Person();
+                person.setId(rs.getInt("id"));
+                person.setFirstName(rs.getString("first_name"));
+                person.setLastName(rs.getString("last_name"));
+                person.setEmail(rs.getString("email"));
                 rs.close();
                 pstmt.close();
                 connection.close();
-                return personId;
+                return person;
             } else {
                 throw new NotFoundException("email not registered");
             }
