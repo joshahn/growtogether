@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "#task",
+    "type": "object",
+    "title": "Task Schema",
+    "description": "The details of a particular Task",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "ID of a Task",
+            "minimum": 1
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of a Task",
+            "minLength": 1,
+            "maxLength": 255
+        },
+        "points": {
+            "type": "integer",
+            "description": "How many points a task is worth",
+            "minimum": 0
+        }
+    },
+    "required": [
+        "id",
+        "name",
+        "points"
+    ]
+}
