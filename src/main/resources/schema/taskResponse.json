@@ -1,16 +1,11 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "#person",
+    "id": "#taskResponse",
     "type": "object",
-    "title": "Person Schema",
-    "description": "The details of a particular Person",
+    "title": "Task Response Schema",
+    "description": "The response of a particular person's tasks",
     "additionalProperties": false,
     "properties": {
-        "id": {
-            "type": "integer",
-            "description": "ID of a Person",
-            "minimum": 1
-        },
         "firstName": {
             "type": "string",
             "description": "First Name of a Person",
@@ -32,19 +27,12 @@
         "tasks": {
             "type": "array",
             "descrption": "All the tasks a person has completed",
-            "items": {
-                "$ref": "task.json"
-            }
+            "$ref": "task.json"
         },
         "totalPoints": {
-            "type": "integer",
+            "type": "int",
             "description": "How many points a person has",
             "minimum": 0
         }
-    },
-    "required": [
-        "firtName",
-        "lastName",
-        "email"
-    ]
+    }
 }
