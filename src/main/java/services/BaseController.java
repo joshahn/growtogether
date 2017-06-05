@@ -1,4 +1,4 @@
-package users;
+package services;
 
 import java.net.URISyntaxException;
 import java.sql.Connection;

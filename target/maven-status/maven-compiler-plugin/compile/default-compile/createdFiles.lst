@@ -1,6 +1,8 @@
 errors/NotFoundException.class
 errors/ServiceException.class
+Configuration.class
+json/TaskResponse.class
 json/Person.class
-users/Configuration.class
-users/PersonsController.class
-users/BaseController.class
+services/PersonsController.class
+json/Task.class
+services/BaseController.class
