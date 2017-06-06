@@ -58,6 +58,7 @@ public class TasksController extends BaseController {
             pstmt.setInt(1, personId);
             pstmt.setInt(2, task.getId());
             pstmt.setTimestamp(3, new Timestamp(task.getCompletedDate().getTime()));
+            System.out.println(createStatement);
 
             pstmt.executeUpdate();
 
