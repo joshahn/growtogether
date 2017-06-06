@@ -1,5 +1,4 @@
 Configuration.class
-json/TaskResponse.class
 services/PersonsController.class
 errors/NotFoundException.class
 errors/ServiceException.class

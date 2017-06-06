@@ -3,6 +3,7 @@ package services;
 import errors.*;
 import json.Person;
 import json.Task;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,6 +70,7 @@ public class PersonsController extends BaseController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
     public @ResponseBody Person createPerson(@RequestBody Person person) {
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
