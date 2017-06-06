@@ -1,6 +1,7 @@
 
 package json;
 
+import java.util.Date;
 import javax.annotation.Generated;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -21,7 +22,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonPropertyOrder({
     "id",
     "name",
-    "points"
+    "points",
+    "completedDate"
 })
 public class Task {
 
@@ -43,6 +45,12 @@ public class Task {
      */
     @JsonProperty("points")
     private Integer points;
+    /**
+     * Completed date and time
+     * 
+     */
+    @JsonProperty("completedDate")
+    private Date completedDate;
 
     /**
      * ID of a Task
@@ -122,6 +130,33 @@ public class Task {
 
     public Task withPoints(Integer points) {
         this.points = points;
+        return this;
+    }
+
+    /**
+     * Completed date and time
+     * 
+     * @return
+     *     The completedDate
+     */
+    @JsonProperty("completedDate")
+    public Date getCompletedDate() {
+        return completedDate;
+    }
+
+    /**
+     * Completed date and time
+     * 
+     * @param completedDate
+     *     The completedDate
+     */
+    @JsonProperty("completedDate")
+    public void setCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
+    }
+
+    public Task withCompletedDate(Date completedDate) {
+        this.completedDate = completedDate;
         return this;
     }
 

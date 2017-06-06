@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping("/api/persons")
 public class PersonsController extends BaseController {
 
-
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody Person getPerson(@RequestParam(value="email", required=true) String email) {
         try (Connection connection = getConnection()) {
@@ -48,6 +47,7 @@ public class PersonsController extends BaseController {
                 Integer totalPoints = task.getPoints();
                 while (rs.next()) {
                     task = new Task();
+                    task.setId(rs.getInt("id"));
                     task.setName(rs.getString("name"));
                     task.setPoints(rs.getInt("points"));
                     totalPoints += task.getPoints();
