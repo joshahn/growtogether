@@ -28,9 +28,9 @@ public class PersonsController extends BaseController {
     public @ResponseBody Person getPerson(@RequestParam(value="email", required=true) String email) {
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
-            String selectStatement = "SELECT p.id, p.first_name, p.last_name, p.email, t.name, t.points FROM task t " +
-                    "LEFT JOIN persontasks pt ON (t.id = pt.task_id) " +
-                    "LEFT JOIN person p ON (p.id = pt.person_id) WHERE p.email = ?;";
+            String selectStatement = "SELECT p.id, p.first_name, p.last_name, p.email, t.name, t.points +"
+            		+ "FROM person p LEFT JOIN persontasks pt ON (p.id = pt.person_id) LEFT JOIN task t "
+            		+ "ON  (t.id = pt.task_id) WHERE p.email = ?;";
             System.out.println(selectStatement);
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
