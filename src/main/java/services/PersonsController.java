@@ -29,8 +29,8 @@ public class PersonsController extends BaseController {
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
             String selectStatement = "SELECT p.id, p.first_name, p.last_name, p.email, t.name, t.points FROM task t " +
-                    "INNER JOIN persontasks pt ON (t.id = pt.task_id) " +
-                    "INNER JOIN person p ON (p.id = pt.person_id) WHERE p.email = ?;";
+                    "LEFT JOIN persontasks pt ON (t.id = pt.task_id) " +
+                    "LEFT JOIN person p ON (p.id = pt.person_id) WHERE p.email = ?;";
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
