@@ -31,6 +31,7 @@ public class PersonsController extends BaseController {
             String selectStatement = "SELECT p.id, p.first_name, p.last_name, p.email, t.name, t.points FROM task t " +
                     "LEFT JOIN persontasks pt ON (t.id = pt.task_id) " +
                     "LEFT JOIN person p ON (p.id = pt.person_id) WHERE p.email = ?;";
+            System.out.println(selectStatement);
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
@@ -48,6 +49,7 @@ public class PersonsController extends BaseController {
 
                 Integer totalPoints = task.getPoints();
                 while (rs.next()) {
+                	System.out.println(rs.getRow());
                     task = new Task();
                     task.setId(rs.getInt("id"));
                     task.setName(rs.getString("name"));
@@ -60,6 +62,7 @@ public class PersonsController extends BaseController {
                 rs.close();
                 pstmt.close();
                 connection.close();
+                System.out.println("Returning the person");
                 return person;
             } else {
                 throw new NotFoundException("email not registered");
