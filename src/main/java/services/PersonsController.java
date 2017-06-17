@@ -31,7 +31,6 @@ public class PersonsController extends BaseController {
             String selectStatement = "SELECT p.id, p.first_name, p.last_name, p.email, t.name, t.points "
             		+ "FROM person p LEFT JOIN persontasks pt ON (p.id = pt.person_id) LEFT JOIN task t "
             		+ "ON  (t.id = pt.task_id) WHERE p.email = ?;";
-            System.out.println(selectStatement);
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
@@ -43,26 +42,30 @@ public class PersonsController extends BaseController {
                 person.setEmail(rs.getString("email"));
                 List<Task> tasks = new ArrayList<>();
                 Task task = new Task();
-                task.setName(rs.getString("name"));
-                task.setPoints(rs.getInt("points"));
-                tasks.add(task);
-
-                Integer totalPoints = task.getPoints();
-                while (rs.next()) {
-                	System.out.println(rs.getRow());
-                    task = new Task();
-                    task.setId(rs.getInt("id"));
-                    task.setName(rs.getString("name"));
+                Integer totalPoints = 0;
+                String taskName = rs.getString("name");
+                System.out.println("Task name is: " + rs.getString("name"));
+                System.out.println("Task name class is: " + rs.getString("name").getClass());
+                if (taskName != "NULL") {
+                	task.setName(taskName);
+                	task.setName(rs.getString("name"));
                     task.setPoints(rs.getInt("points"));
-                    totalPoints += task.getPoints();
                     tasks.add(task);
+                    totalPoints += task.getPoints();
+                    while (rs.next()) {
+                        task = new Task();
+                        task.setId(rs.getInt("id"));
+                        task.setName(rs.getString("name"));
+                        task.setPoints(rs.getInt("points"));
+                        totalPoints += task.getPoints();
+                        tasks.add(task);
+                    }
                 }
                 person.setTasks(tasks);
                 person.setTotalPoints(totalPoints);
                 rs.close();
                 pstmt.close();
                 connection.close();
-                System.out.println("Returning the person");
                 return person;
             } else {
                 throw new NotFoundException("email not registered");
