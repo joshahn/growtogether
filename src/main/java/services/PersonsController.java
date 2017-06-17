@@ -45,8 +45,7 @@ public class PersonsController extends BaseController {
                 Integer totalPoints = 0;
                 String taskName = rs.getString("name");
                 System.out.println("Task name is: " + rs.getString("name"));
-                System.out.println("Task name class is: " + rs.getString("name").getClass());
-                if (taskName != "NULL") {
+                if (taskName != "null") {
                 	task.setName(taskName);
                 	task.setName(rs.getString("name"));
                     task.setPoints(rs.getInt("points"));
