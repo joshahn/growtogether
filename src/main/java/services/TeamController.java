@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +24,9 @@ import json.Team;
 @Transactional
 @RequestMapping("/api/teams")
 public class TeamController extends BaseController {
-	@RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody List<Person> getTeam(@RequestParam(value="teamId", required=true) int id) {
+	
+	@RequestMapping(value="/{teamId}", method=RequestMethod.GET)
+    public @ResponseBody List<Person> getTeam(@PathVariable("teamId") int teamId) {
 		System.out.println("Calling get team");
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
@@ -33,7 +35,7 @@ public class TeamController extends BaseController {
             		+ "LEFT JOIN team t ON (t.id = tp.team_id) "
             		+ "WHERE t.id = ?;";
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, teamId);
             ResultSet rs = pstmt.executeQuery();
             List<Person> persons = new ArrayList<Person>();
             while (rs.next()) {
@@ -52,4 +54,17 @@ public class TeamController extends BaseController {
             throw new ServiceException("Error while retrieving all the people for this team");
         }
     }
+	
+
+	@RequestMapping(method=RequestMethod.GET)
+    public @ResponseBody List<Team> getTeams() {
+		try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            String selectStatement = "SELECT * from team;";
+            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
+            ResultSet rs = pstmt.executeQuery();
+		} catch (Exception e) {
+            throw new ServiceException("Error while retrieving all the teams");
+        }
+	}
 }
