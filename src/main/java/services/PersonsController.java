@@ -53,7 +53,10 @@ public class PersonsController extends BaseController {
                 Task task = new Task();
                 Integer totalPoints = 0;
                 String taskName = rs.getString("name");
-                System.out.println("Task name is: " + rs.getString("name"));
+                Timestamp time = rs.getTimestamp("completed_date");
+                Long timeInMilliSeconds = time.getTime() / 1000;
+                Integer timeAsInt = Integer.valueOf(timeInMilliSeconds.intValue());
+                task.setCompletedDate(timeAsInt);
                 if (taskName != null) {
                 	task.setName(taskName);
                 	task.setName(rs.getString("name"));
@@ -65,9 +68,9 @@ public class PersonsController extends BaseController {
                         task.setId(rs.getInt("team_id"));
                         task.setName(rs.getString("name"));
                         task.setPoints(rs.getInt("points"));
-                        Timestamp time = rs.getTimestamp("completed_date");
-                        Long timeInMilliSeconds = time.getTime() / 1000;
-                        Integer timeAsInt = Integer.valueOf(timeInMilliSeconds.intValue());
+                        time = rs.getTimestamp("completed_date");
+                        timeInMilliSeconds = time.getTime() / 1000;
+                        timeAsInt = Integer.valueOf(timeInMilliSeconds.intValue());
                         task.setCompletedDate(timeAsInt);
                         totalPoints += task.getPoints();
                         tasks.add(task);
