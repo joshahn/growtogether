@@ -27,6 +27,10 @@ public class TeamController extends BaseController {
 	
 	@RequestMapping(value="/{teamId}", method=RequestMethod.GET)
     public @ResponseBody List<Person> getTeam(@PathVariable("teamId") int teamId) {
+		return getTeamById(teamId);
+    }
+	
+	private List<Person> getTeamById(int teamId) {
 		System.out.println("Calling get team");
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
@@ -53,18 +57,32 @@ public class TeamController extends BaseController {
         } catch (Exception e) {
             throw new ServiceException("Error while retrieving all the people for this team");
         }
-    }
-	
-//
-//	@RequestMapping(method=RequestMethod.GET)
-//    public @ResponseBody List<Team> getTeams() {
-//		try (Connection connection = getConnection()) {
-//            connection.setAutoCommit(false);
-//            String selectStatement = "SELECT * from team;";
-//            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
-//            ResultSet rs = pstmt.executeQuery();
-//		} catch (Exception e) {
-//            throw new ServiceException("Error while retrieving all the teams");
-//        }
-//	}
+	}
+
+	@RequestMapping(method=RequestMethod.GET)
+    public @ResponseBody List<Team> getTeams() {
+		try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            String selectStatement = "SELECT * from team;";
+            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
+            ResultSet rs = pstmt.executeQuery();
+            List<Team> teams = new ArrayList<Team>();
+            while (rs.next()) {
+            	Team team = new Team();
+            	int teamId = rs.getInt("id");
+            	team.setId(teamId);
+            	team.setName(rs.getString("name"));
+            	List<Person> persons = getTeamById(teamId);
+            	int totalPoints = 0;
+            	for (Person person: persons) {
+            		totalPoints += person.getTotalPoints();
+            	}
+            	team.setTotalPoints(totalPoints);
+            	teams.add(team);
+            }
+            return teams;
+		} catch (Exception e) {
+            throw new ServiceException("Error while retrieving all the teams");
+        }
+	}
 }
