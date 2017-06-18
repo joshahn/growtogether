@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "#team",
+    "type": "object",
+    "title": "Team Schema",
+    "description": "The details of a particular Team",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "integer",
+            "description": "ID of the Team",
+            "minimum": 1
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of a Team",
+            "minLength": 1,
+            "maxLength": 255
+        },
+        "totalPoints": {
+            "type": "integer",
+            "description": "How many points this team has",
+            "minimum": 0
+        }
+    },
+    "required": [
+        "id",
+        "name"
+    ]
+}
