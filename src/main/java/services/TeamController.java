@@ -55,16 +55,16 @@ public class TeamController extends BaseController {
         }
     }
 	
-
-	@RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody List<Team> getTeams() {
-		try (Connection connection = getConnection()) {
-            connection.setAutoCommit(false);
-            String selectStatement = "SELECT * from team;";
-            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
-            ResultSet rs = pstmt.executeQuery();
-		} catch (Exception e) {
-            throw new ServiceException("Error while retrieving all the teams");
-        }
-	}
+//
+//	@RequestMapping(method=RequestMethod.GET)
+//    public @ResponseBody List<Team> getTeams() {
+//		try (Connection connection = getConnection()) {
+//            connection.setAutoCommit(false);
+//            String selectStatement = "SELECT * from team;";
+//            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
+//            ResultSet rs = pstmt.executeQuery();
+//		} catch (Exception e) {
+//            throw new ServiceException("Error while retrieving all the teams");
+//        }
+//	}
 }
