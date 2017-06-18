@@ -24,7 +24,8 @@ import json.Team;
 @RequestMapping("/api/teams")
 public class TeamController extends BaseController {
 	@RequestMapping(method=RequestMethod.GET)
-    public @ResponseBody List<Person> getTeam(@RequestParam(value="id", required=true) int id) {
+    public @ResponseBody List<Person> getTeam(@RequestParam(value="teamId", required=true) int id) {
+		System.out.println("Calling get team");
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
             String selectStatement = "SELECT p.* FROM person p "
@@ -38,7 +39,9 @@ public class TeamController extends BaseController {
             while (rs.next()) {
             	Person person = new Person();
             	String email = rs.getString("email");
+            	System.out.println("person's email: " + email);
             	PersonsController.setPersonAndTask(person, email);
+            	System.out.println("person was added and created. " + person.toString());
                 persons.add(person);
             }
             rs.close();
@@ -46,7 +49,7 @@ public class TeamController extends BaseController {
             connection.close();
             return persons;
         } catch (Exception e) {
-            throw new ServiceException("Error while retrieving list of all tasks");
+            throw new ServiceException("Error while retrieving all the people for this team");
         }
     }
 }
