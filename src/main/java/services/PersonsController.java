@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +27,25 @@ public class PersonsController extends BaseController {
 
     @RequestMapping(method=RequestMethod.GET)
     public @ResponseBody Person getPerson(@RequestParam(value="email", required=true) String email) {
-        try (Connection connection = getConnection()) {
+        
+    	Person person = new Person();
+    	setPersonAndTask(person, email);
+	    setTeam(person, email);
+	    return person;
+	    }
+    
+    protected static void setPersonAndTask(Person person, String email) {
+    	try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
-            String selectStatement = "SELECT p.id, p.first_name, p.last_name, p.email, t.name, t.points "
+            String selectStatement = "SELECT p.id as person_id, p.first_name, p.last_name, p.email, "
+            		+ "t.id as team_id, t.name, t.points, pt.completed_date "
             		+ "FROM person p LEFT JOIN persontasks pt ON (p.id = pt.person_id) LEFT JOIN task t "
             		+ "ON  (t.id = pt.task_id) WHERE p.email = ?;";
             PreparedStatement pstmt = connection.prepareStatement(selectStatement);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                Person person = new Person();
-                person.setId(rs.getInt("id"));
+                person.setId(rs.getInt("person_id"));
                 person.setFirstName(rs.getString("first_name"));
                 person.setLastName(rs.getString("last_name"));
                 person.setEmail(rs.getString("email"));
@@ -53,9 +62,12 @@ public class PersonsController extends BaseController {
                     totalPoints += task.getPoints();
                     while (rs.next()) {
                         task = new Task();
-                        task.setId(rs.getInt("id"));
+                        task.setId(rs.getInt("team_id"));
                         task.setName(rs.getString("name"));
                         task.setPoints(rs.getInt("points"));
+                        Timestamp time = rs.getTimestamp("completed_date");
+                        int timeInMilliSeconds = (int) time.getTime();
+                        task.setCompletedDate(timeInMilliSeconds);
                         totalPoints += task.getPoints();
                         tasks.add(task);
                     }
@@ -65,17 +77,15 @@ public class PersonsController extends BaseController {
                 rs.close();
                 pstmt.close();
                 connection.close();
-                setTeam(person, email);
-                return person;
             } else {
                 throw new NotFoundException("email not registered");
             }
-        } catch (Exception e) {
+    	} catch (Exception e) {
             throw new NotFoundException("email not registered");
         }
     }
     
-    private void setTeam(Person person, String email) {
+    private static void setTeam(Person person, String email) {
     	try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);
             String selectStatement = "SELECT t.id FROM person p "
