@@ -65,11 +65,34 @@ public class PersonsController extends BaseController {
                 rs.close();
                 pstmt.close();
                 connection.close();
+                setTeam(person, email);
                 return person;
             } else {
                 throw new NotFoundException("email not registered");
             }
         } catch (Exception e) {
+            throw new NotFoundException("email not registered");
+        }
+    }
+    
+    private void setTeam(Person person, String email) {
+    	try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            String selectStatement = "SELECT t.id FROM person p "
+            		+ "LEFT JOIN teampersons tp ON (p.id = tp.person_id) "
+            		+ "LEFT JOIN team t ON (t.id = tp.team_id) "
+            		+ "WHERE p.email = ?;";
+            PreparedStatement pstmt = connection.prepareStatement(selectStatement);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+            	person.setTeamId(rs.getInt("id"));
+            }
+            rs.close();
+            pstmt.close();
+            connection.close();
+    	}
+    	catch (Exception e) {
             throw new NotFoundException("email not registered");
         }
     }
