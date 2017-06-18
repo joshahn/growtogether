@@ -66,8 +66,9 @@ public class PersonsController extends BaseController {
                         task.setName(rs.getString("name"));
                         task.setPoints(rs.getInt("points"));
                         Timestamp time = rs.getTimestamp("completed_date");
-                        int timeInMilliSeconds = (int) time.getTime();
-                        task.setCompletedDate(timeInMilliSeconds);
+                        Long timeInMilliSeconds = time.getTime();
+                        Integer timeAsInt = Integer.valueOf(timeInMilliSeconds.intValue());
+                        task.setCompletedDate(timeAsInt);
                         totalPoints += task.getPoints();
                         tasks.add(task);
                     }
