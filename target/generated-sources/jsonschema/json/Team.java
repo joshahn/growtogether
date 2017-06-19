@@ -11,9 +11,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 
 /**
- * Task Schema
+ * Team Schema
  * <p>
- * The details of a particular Task
+ * The details of a particular Team
  * 
  */
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -21,38 +21,31 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonPropertyOrder({
     "id",
     "name",
-    "points",
-    "completedDate"
+    "totalPoints"
 })
-public class Task {
+public class Team {
 
     /**
-     * ID of a Task
+     * ID of the Team
      * 
      */
     @JsonProperty("id")
     private Integer id;
     /**
-     * Name of a Task
+     * Name of a Team
      * 
      */
     @JsonProperty("name")
     private String name;
     /**
-     * How many points a task is worth
+     * How many points this team has
      * 
      */
-    @JsonProperty("points")
-    private Integer points;
-    /**
-     * Completed date and time as milliseconds
-     * 
-     */
-    @JsonProperty("completedDate")
-    private Integer completedDate;
+    @JsonProperty("totalPoints")
+    private Integer totalPoints;
 
     /**
-     * ID of a Task
+     * ID of the Team
      * 
      * @return
      *     The id
@@ -63,7 +56,7 @@ public class Task {
     }
 
     /**
-     * ID of a Task
+     * ID of the Team
      * 
      * @param id
      *     The id
@@ -73,13 +66,13 @@ public class Task {
         this.id = id;
     }
 
-    public Task withId(Integer id) {
+    public Team withId(Integer id) {
         this.id = id;
         return this;
     }
 
     /**
-     * Name of a Task
+     * Name of a Team
      * 
      * @return
      *     The name
@@ -90,7 +83,7 @@ public class Task {
     }
 
     /**
-     * Name of a Task
+     * Name of a Team
      * 
      * @param name
      *     The name
@@ -100,62 +93,35 @@ public class Task {
         this.name = name;
     }
 
-    public Task withName(String name) {
+    public Team withName(String name) {
         this.name = name;
         return this;
     }
 
     /**
-     * How many points a task is worth
+     * How many points this team has
      * 
      * @return
-     *     The points
+     *     The totalPoints
      */
-    @JsonProperty("points")
-    public Integer getPoints() {
-        return points;
+    @JsonProperty("totalPoints")
+    public Integer getTotalPoints() {
+        return totalPoints;
     }
 
     /**
-     * How many points a task is worth
+     * How many points this team has
      * 
-     * @param points
-     *     The points
+     * @param totalPoints
+     *     The totalPoints
      */
-    @JsonProperty("points")
-    public void setPoints(Integer points) {
-        this.points = points;
+    @JsonProperty("totalPoints")
+    public void setTotalPoints(Integer totalPoints) {
+        this.totalPoints = totalPoints;
     }
 
-    public Task withPoints(Integer points) {
-        this.points = points;
-        return this;
-    }
-
-    /**
-     * Completed date and time as milliseconds
-     * 
-     * @return
-     *     The completedDate
-     */
-    @JsonProperty("completedDate")
-    public Integer getCompletedDate() {
-        return completedDate;
-    }
-
-    /**
-     * Completed date and time as milliseconds
-     * 
-     * @param completedDate
-     *     The completedDate
-     */
-    @JsonProperty("completedDate")
-    public void setCompletedDate(Integer completedDate) {
-        this.completedDate = completedDate;
-    }
-
-    public Task withCompletedDate(Integer completedDate) {
-        this.completedDate = completedDate;
+    public Team withTotalPoints(Integer totalPoints) {
+        this.totalPoints = totalPoints;
         return this;
     }
 

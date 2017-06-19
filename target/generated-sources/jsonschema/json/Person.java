@@ -25,6 +25,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
     "firstName",
     "lastName",
     "email",
+    "teamId",
     "tasks",
     "totalPoints"
 })
@@ -54,6 +55,8 @@ public class Person {
      */
     @JsonProperty("email")
     private String email;
+    @JsonProperty("teamId")
+    private Integer teamId;
     @JsonProperty("tasks")
     private List<Task> tasks = new ArrayList<Task>();
     /**
@@ -168,6 +171,31 @@ public class Person {
 
     public Person withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    /**
+     * 
+     * @return
+     *     The teamId
+     */
+    @JsonProperty("teamId")
+    public Integer getTeamId() {
+        return teamId;
+    }
+
+    /**
+     * 
+     * @param teamId
+     *     The teamId
+     */
+    @JsonProperty("teamId")
+    public void setTeamId(Integer teamId) {
+        this.teamId = teamId;
+    }
+
+    public Person withTeamId(Integer teamId) {
+        this.teamId = teamId;
         return this;
     }
 

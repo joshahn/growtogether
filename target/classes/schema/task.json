@@ -23,11 +23,9 @@
             "minimum": 0
         },
         "completedDate": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Completed date and time",
-            "minLength": 20,
-            "maxLength": 25
+            "type": "integer",
+            "description": "Completed date and time as milliseconds",
+            "minimum": 0
         }
     },
     "required": [

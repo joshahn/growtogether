@@ -1,8 +1,11 @@
 Configuration.class
 services/PersonsController.class
+services/AliasWebConfig.class
 errors/NotFoundException.class
 errors/ServiceException.class
 json/Person.class
+services/TeamController.class
 json/Task.class
+json/Team.class
 services/TasksController.class
 services/BaseController.class

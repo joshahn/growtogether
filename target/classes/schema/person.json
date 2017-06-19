@@ -29,6 +29,11 @@
             "minLength": 1,
             "maxLength": 255
         },
+        "teamId": {
+            "type": "integer",
+            "descrption": "All the tasks a person has completed",
+            "minimum": 1
+        },
         "tasks": {
             "type": "array",
             "descrption": "All the tasks a person has completed",
